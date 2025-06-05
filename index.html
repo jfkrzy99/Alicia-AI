@@ -2,23 +2,6 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Alicia AI v0.2</title>
-  <style>
-body {
-  font-family: sans-serif;
-  background: url('555025.jpg') no-repeat center center fixed;
-  background-size: cover;
-  color: #f4f4f4;
-  padding: 2rem;
-  max-width: 700px;
-  margin: auto;
-  backdrop-filter: brightness(0.8);
-}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Alicia AI v0.2 – Intelligence Ally</title>
   <style>
@@ -27,10 +10,8 @@ body {
       background: url('555025.jpg') no-repeat center center fixed;
       background-size: cover;
       color: #f4f4f4;
-      padding: 2rem;
-      margin-left: 2rem;
-      margin-right: auto;
-      text-align: left;
+      margin: 0;
+      padding: 0;
     }
 
     h1 {
@@ -45,8 +26,8 @@ body {
 
     .button {
       display: inline-block;
-      background: #003366; /* Dark Blue */
-      color: #fff;          /* White text for contrast */
+      background: #003366;
+      color: #fff;
       padding: 10px 20px;
       margin: 10px 0;
       border-radius: 5px;
@@ -56,53 +37,78 @@ body {
     .section {
       margin-top: 2rem;
     }
+
+    .content {
+      padding: 2rem;
+      margin-left: 2rem;
+      max-width: 700px;
+      text-align: left;
+      background-color: rgba(0, 0, 0, 0.6); /* optional: translucent background */
+      border-radius: 10px;
+    }
+
+    video {
+      width: 100%;
+      display: block;
+    }
   </style>
 </head>
 <body>
-  <h1>Alicia AI v0.2</h1>
-  <p>Offline-ready voice AI assistant for Unity.</p>
-  <p><strong>By Intelligence Ally</strong></p>
 
-  <div class="section">
-    <a class="button" href="https://assetstore.unity.com/" target="_blank">🧩 View on Unity Asset Store</a><br />
-    <a class="button" href="mailto:intelligenceally@proton.me">📬 Contact Support</a>
+  <!-- Top video presentation -->
+  <video autoplay loop muted playsinline>
+    <source src="alicia_presentation.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Main content aligned left -->
+  <div class="content">
+    <h1>Alicia AI v0.2</h1>
+    <p>Offline-ready voice AI assistant for Unity.</p>
+    <p><strong>By Intelligence Ally</strong></p>
+
+    <div class="section">
+      <a class="button" href="https://assetstore.unity.com/" target="_blank">🧩 View on Unity Asset Store</a><br />
+      <a class="button" href="mailto:intelligenceally@proton.me">📬 Contact Support</a>
+    </div>
+
+    <div class="section">
+      <h2>What is Alicia AI?</h2>
+      <p>
+        Alicia AI brings voice-powered AI to your Unity project — powered by open-source large language models running locally with Ollama.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>Requirements</h2>
+      <ul>
+        <li><a href="https://ollama.com" target="_blank">Ollama installed</a></li>
+        <li>An LLM like <code>llama3</code> or <code>phi4</code></li>
+        <li>CUDA (min 8GB GPU recommended)</li>
+        <li>Unity 2021 or later</li>
+      </ul>
+      <p>A full setup guide is included with the package.</p>
+    </div>
+
+    <div class="section">
+      <h2>No Ads. No Cookies.</h2>
+      <p>We don’t track you. We don’t use cookies. We just build tools for creative people like you.</p>
+    </div>
+
+    <div class="section">
+      <h2>About Intelligence Ally</h2>
+      <p>We're creators first. We make tools we wish existed. Alicia AI is just the beginning.</p>
+    </div>
   </div>
 
+  <!-- Bottom showcase video -->
   <div class="section">
-    <h2>What is Alicia AI?</h2>
-    <p>
-      Alicia AI brings voice-powered AI to your Unity project — powered by open-source large language models running locally with Ollama.
-    </p>
-  </div>
-
-  <div class="section">
-    <h2>Requirements</h2>
-    <ul>
-      <li><a href="https://ollama.com" target="_blank">Ollama installed</a></li>
-      <li>An LLM like <code>llama3</code> or <code>phi4</code></li>
-      <li>CUDA (min 8GB GPU recommended)</li>
-      <li>Unity 2021 or later</li>
-    </ul>
-    <p>A full setup guide is included with the package.</p>
-  </div>
-
-  <div class="section">
-    <h2>No Ads. No Cookies.</h2>
-    <p>We don’t track you. We don’t use cookies. We just build tools for creative people like you.</p>
-  </div>
-
-  <div class="section">
-    <h2>About Intelligence Ally</h2>
-    <p>We're creators first. We make tools we wish existed. Alicia AI is just the beginning.</p>
-  </div>
-
-  <div class="section">
-    <h2>Preview Video</h2>
-    <video width="100%" autoplay loop muted playsinline style="margin-top: 10px; border-radius: 8px;">
+    <video autoplay loop muted playsinline style="margin: 2rem; border-radius: 8px;">
       <source src="alicia_showcase.mp4" type="video/mp4">
       Your browser does not support the video tag.
     </video>
   </div>
+
 </body>
 </html>
 
