@@ -3,107 +3,170 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Alicia AI v0.2 – Intelligence Ally</title>
+  <title>Alicia AI v0.21 – Intelligence Ally</title>
   <style>
+    :root {
+      --accent: #00ffcc;
+      --dark: #0d0d0d;
+      --bg-glass: rgba(0, 0, 0, 0.7);
+      --hover: #009988;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: sans-serif;
+      font-family: 'Segoe UI', sans-serif;
       background: url('555025.jpg') no-repeat center center fixed;
       background-size: cover;
       color: #f4f4f4;
       margin: 0;
       padding: 0;
+      scroll-behavior: smooth;
     }
 
-    h1 {
-      color: #00ffcc;
+    header {
+      background-color: var(--bg-glass);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
-    a {
-      color: #00ffcc;
+    header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+      color: var(--accent);
+    }
+
+    nav a {
+      color: var(--accent);
+      margin-left: 1rem;
       text-decoration: none;
       font-weight: bold;
     }
 
+    nav a:hover {
+      color: var(--hover);
+    }
+
     .button {
       display: inline-block;
-      background: #003366;
-      color: #fff;
-      padding: 10px 20px;
+      background: var(--accent);
+      color: #000;
+      padding: 12px 24px;
       margin: 10px 0;
-      border-radius: 5px;
+      border-radius: 8px;
+      font-weight: bold;
       text-decoration: none;
+      transition: background 0.3s ease;
+    }
+
+    .button:hover {
+      background: var(--hover);
+      color: #fff;
     }
 
     .section {
-      margin-top: 2rem;
+      padding: 4rem 2rem;
     }
 
     .content {
+      max-width: 800px;
+      margin: auto;
+      background-color: var(--bg-glass);
       padding: 2rem;
-      margin-left: 2rem;
-      max-width: 700px;
-      text-align: left;
-      background-color: rgba(0, 0, 0, 0.6); /* optional: translucent background */
-      border-radius: 10px;
+      border-radius: 12px;
     }
 
-    video {
+    h2 {
+      color: var(--accent);
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 0.3rem;
+      margin-top: 2rem;
+    }
+
+    video, img {
       width: 100%;
-      display: block;
+      border-radius: 12px;
+    }
+
+    ul {
+      padding-left: 1.2rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: var(--bg-glass);
+      color: #aaa;
+      font-size: 0.85rem;
     }
   </style>
 </head>
 <body>
 
-  <!-- Top video presentation -->
-  <video autoplay loop muted playsinline>
-    <source src="alicia_presentation.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
-
-  <!-- Main content aligned left -->
-  <div class="content">
+  <header>
     <h1>Alicia AI v0.2</h1>
-    <p>Offline-ready voice AI assistant for Unity.</p>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#requirements">Requirements</a>
+      <a href="#showcase">Showcase</a>
+      <a href="mailto:intelligenceally@proton.me">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Top video presentation -->
+  <section class="section">
+    <video autoplay loop muted playsinline>
+      <source src="alicia_presentation.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </section>
+
+  <section class="section content" id="about">
+    <h2>What is Alicia AI?</h2>
+    <p><strong>Alicia AI</strong> is your offline-ready voice-powered assistant for Unity. Designed for creators, it runs large language models locally using Ollama, giving you complete control without compromise.</p>
+
     <p><strong>By Intelligence Ally</strong></p>
+    <a class="button" href="https://assetstore.unity.com/" target="_blank">🧩 View on Unity Asset Store</a>
+    <a class="button" href="mailto:intelligenceally@proton.me">📬 Contact Support</a>
+  </section>
 
-    <div class="section">
-      <a class="button" href="https://assetstore.unity.com/" target="_blank">🧩 View on Unity Asset Store</a><br />
-      <a class="button" href="mailto:intelligenceally@proton.me">📬 Contact Support</a>
-    </div>
+  <section class="section content" id="requirements">
+    <h2>Requirements</h2>
+    <ul>
+      <li><a href="https://ollama.com" target="_blank">Ollama</a> installed and running</li>
+      <li>Local LLM like <code>llama3</code> or <code>phi4</code></li>
+      <li>CUDA-enabled GPU (8GB VRAM or more recommended)</li>
+      <li>Unity 2021 or newer</li>
+    </ul>
+    <p>Full setup guide included in the package.</p>
+  </section>
 
-    <div class="section">
-      <h2>What is Alicia AI?</h2>
-      <p>
-        Alicia AI brings voice-powered AI to your Unity project — powered by open-source large language models running locally with Ollama.
-      </p>
-    </div>
+  <section class="section content">
+    <h2>No Ads. No Cookies.</h2>
+    <p>We don’t track you. We don’t use cookies. We just build useful tools.</p>
+  </section>
 
-    <div class="section">
-      <h2>Requirements</h2>
-      <ul>
-        <li><a href="https://ollama.com" target="_blank">Ollama installed</a></li>
-        <li>An LLM like <code>llama3</code> or <code>phi4</code></li>
-        <li>CUDA (min 8GB GPU recommended)</li>
-        <li>Unity 2021 or later</li>
-      </ul>
-      <p>A full setup guide is included with the package.</p>
-    </div>
+  <section class="section content">
+    <h2>About Intelligence Ally</h2>
+    <p>We’re creators who build tools we wish existed. Alicia AI is the first of many.</p>
+  </section>
 
-    <div class="section">
-      <h2>No Ads. No Cookies.</h2>
-      <p>We don’t track you. We don’t use cookies. We just build tools for creative people like you.</p>
-    </div>
+  <section class="section content" id="showcase">
+    <h2>Showcase</h2>
+    <img src="alicia_showcase.jpg" alt="Alicia AI Showcase" />
+  </section>
 
-    <div class="section">
-      <h2>About Intelligence Ally</h2>
-      <p>We're creators first. We make tools we wish existed. Alicia AI is just the beginning.</p>
-    </div>
-  </div>
+  <footer>
+    &copy; 2025 Intelligence Ally. All rights reserved. | <a href="#top" style="color: var(--accent);">Back to top</a>
+  </footer>
 
-<div class="section">
-  <img src="alicia_showcase.jpg" alt="Alicia AI Showcase" style="margin: 2rem; border-radius: 8px; width: 100%; display: block;" />
-</div>
 </body>
 </html>
 
