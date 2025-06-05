@@ -3,12 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Alicia AI v0.21 – Intelligence Ally</title>
+  <title>Alicia AI v0.2 – Intelligence Ally</title>
   <style>
     :root {
       --accent: #00ffcc;
       --dark: #0d0d0d;
       --bg-glass: rgba(0, 0, 0, 0.7);
+      --menu-glass: rgba(30, 30, 30, 0.6);
       --hover: #009988;
     }
 
@@ -23,7 +24,50 @@
       color: #f4f4f4;
       margin: 0;
       padding: 0;
-      scroll-behavior: smooth;
+      display: flex;
+    }
+
+    /* Left menu */
+    .sidebar {
+      width: 220px;
+      min-height: 100vh;
+      background-color: var(--menu-glass);
+      padding: 2rem 1rem;
+      position: sticky;
+      top: 0;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .sidebar h2 {
+      font-size: 1.2rem;
+      color: var(--accent);
+      margin-bottom: 2rem;
+    }
+
+    .sidebar a {
+      color: #ddd;
+      text-decoration: none;
+      display: block;
+      padding: 10px 12px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      transition: background 0.2s ease;
+    }
+
+    .sidebar a:hover {
+      background-color: var(--hover);
+      color: #fff;
+    }
+
+    /* Main content area */
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
     }
 
     header {
@@ -106,67 +150,104 @@
       color: #aaa;
       font-size: 0.85rem;
     }
+
+    @media (max-width: 900px) {
+      body {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        flex-direction: row;
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding: 1rem;
+        position: static;
+      }
+
+      .sidebar a {
+        margin-right: 1rem;
+        margin-bottom: 0;
+        white-space: nowrap;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Alicia AI v0.2</h1>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#requirements">Requirements</a>
-      <a href="#showcase">Showcase</a>
-      <a href="mailto:intelligenceally@proton.me">Contact</a>
-    </nav>
-  </header>
+  <!-- Left menu -->
+  <aside class="sidebar">
+    <div>
+      <h2>🔧 Menu</h2>
+      <a href="#">📁 Projects</a>
+      <a href="#">🧠 Models</a>
+      <a href="#">📊 Logs</a>
+      <a href="#">🎛️ Settings</a>
+    </div>
+    <div>
+      <a href="#">🚪 Logout</a>
+    </div>
+  </aside>
 
-  <!-- Top video presentation -->
-  <section class="section">
-    <video autoplay loop muted playsinline>
-      <source src="alicia_presentation.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-  </section>
+  <!-- Main content -->
+  <div class="main-content">
+    <header>
+      <h1>Alicia AI v0.2</h1>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#requirements">Requirements</a>
+        <a href="#showcase">Showcase</a>
+        <a href="mailto:intelligenceally@proton.me">Contact</a>
+      </nav>
+    </header>
 
-  <section class="section content" id="about">
-    <h2>What is Alicia AI?</h2>
-    <p><strong>Alicia AI</strong> is your offline-ready voice-powered assistant for Unity. Designed for creators, it runs large language models locally using Ollama, giving you complete control without compromise.</p>
+    <section class="section">
+      <video autoplay loop muted playsinline>
+        <source src="alicia_presentation.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </section>
 
-    <p><strong>By Intelligence Ally</strong></p>
-    <a class="button" href="https://assetstore.unity.com/" target="_blank">🧩 View on Unity Asset Store</a>
-    <a class="button" href="mailto:intelligenceally@proton.me">📬 Contact Support</a>
-  </section>
+    <section class="section content" id="about">
+      <h2>What is Alicia AI?</h2>
+      <p><strong>Alicia AI</strong> is your offline-ready voice-powered assistant for Unity. Designed for creators, it runs large language models locally using Ollama, giving you complete control without compromise.</p>
+      <p><strong>By Intelligence Ally</strong></p>
+      <a class="button" href="https://assetstore.unity.com/" target="_blank">🧩 View on Unity Asset Store</a>
+      <a class="button" href="mailto:intelligenceally@proton.me">📬 Contact Support</a>
+    </section>
 
-  <section class="section content" id="requirements">
-    <h2>Requirements</h2>
-    <ul>
-      <li><a href="https://ollama.com" target="_blank">Ollama</a> installed and running</li>
-      <li>Local LLM like <code>llama3</code> or <code>phi4</code></li>
-      <li>CUDA-enabled GPU (8GB VRAM or more recommended)</li>
-      <li>Unity 2021 or newer</li>
-    </ul>
-    <p>Full setup guide included in the package.</p>
-  </section>
+    <section class="section content" id="requirements">
+      <h2>Requirements</h2>
+      <ul>
+        <li><a href="https://ollama.com" target="_blank">Ollama</a> installed and running</li>
+        <li>Local LLM like <code>llama3</code> or <code>phi4</code></li>
+        <li>CUDA-enabled GPU (8GB VRAM or more recommended)</li>
+        <li>Unity 2021 or newer</li>
+      </ul>
+      <p>Full setup guide included in the package.</p>
+    </section>
 
-  <section class="section content">
-    <h2>No Ads. No Cookies.</h2>
-    <p>We don’t track you. We don’t use cookies. We just build useful tools.</p>
-  </section>
+    <section class="section content">
+      <h2>No Ads. No Cookies.</h2>
+      <p>We don’t track you. We don’t use cookies. We just build useful tools.</p>
+    </section>
 
-  <section class="section content">
-    <h2>About Intelligence Ally</h2>
-    <p>We’re creators who build tools we wish existed. Alicia AI is the first of many.</p>
-  </section>
+    <section class="section content">
+      <h2>About Intelligence Ally</h2>
+      <p>We’re creators who build tools we wish existed. Alicia AI is the first of many.</p>
+    </section>
 
-  <section class="section content" id="showcase">
-    <h2>Showcase</h2>
-    <img src="alicia_showcase.jpg" alt="Alicia AI Showcase" />
-  </section>
+    <section class="section content" id="showcase">
+      <h2>Showcase</h2>
+      <img src="alicia_showcase.jpg" alt="Alicia AI Showcase" />
+    </section>
 
-  <footer>
-    &copy; 2025 Intelligence Ally. All rights reserved. | <a href="#top" style="color: var(--accent);">Back to top</a>
-  </footer>
+    <footer>
+      &copy; 2025 Intelligence Ally. All rights reserved. | <a href="#top" style="color: var(--accent);">Back to top</a>
+    </footer>
+  </div>
 
 </body>
 </html>
+
 
