@@ -27,7 +27,6 @@
       display: flex;
     }
 
-    /* Left menu */
     .sidebar {
       width: 220px;
       min-height: 100vh;
@@ -62,7 +61,6 @@
       color: #fff;
     }
 
-    /* Main content area */
     .main-content {
       flex: 1;
       display: flex;
@@ -119,12 +117,73 @@
       padding: 4rem 2rem;
     }
 
+    .content-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .left-images {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .left-images img {
+      width: 150px;
+      border-radius: 12px;
+      border: 2px solid #333;
+    }
+
     .content {
-      max-width: 800px;
-      margin: auto;
+      flex: 1;
+      max-width: 1000px;
       background-color: var(--bg-glass);
       padding: 2rem;
       border-radius: 12px;
+      min-width: 300px;
+    }
+
+    .chat-box {
+      width: 250px;
+      max-height: 600px;
+      display: flex;
+      flex-direction: column;
+      background-color: var(--bg-glass);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #444;
+    }
+
+    .chat-messages {
+      flex: 1;
+      padding: 1rem;
+      overflow-y: auto;
+      font-size: 0.9rem;
+    }
+
+    .chat-input {
+      display: flex;
+      border-top: 1px solid #555;
+    }
+
+    .chat-input input {
+      flex: 1;
+      border: none;
+      padding: 0.8rem;
+      background-color: #111;
+      color: #fff;
+    }
+
+    .chat-input button {
+      background-color: var(--accent);
+      border: none;
+      color: #000;
+      padding: 0.8rem 1rem;
+      font-weight: bold;
+      cursor: pointer;
     }
 
     h2 {
@@ -151,31 +210,27 @@
       font-size: 0.85rem;
     }
 
-    @media (max-width: 900px) {
-      body {
+    @media (max-width: 1000px) {
+      .content-wrapper {
         flex-direction: column;
+        align-items: center;
       }
 
-      .sidebar {
+      .left-images img, .chat-box {
         width: 100%;
-        flex-direction: row;
-        justify-content: flex-start;
-        overflow-x: auto;
-        padding: 1rem;
-        position: static;
+        max-width: 300px;
       }
 
-      .sidebar a {
-        margin-right: 1rem;
-        margin-bottom: 0;
-        white-space: nowrap;
+      .chat-box {
+        height: auto;
+        max-height: none;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Left menu -->
+  <!-- Sidebar -->
   <aside class="sidebar">
     <div>
       <h2>🔧 Menu</h2>
@@ -189,7 +244,7 @@
     </div>
   </aside>
 
-  <!-- Main content -->
+  <!-- Main -->
   <div class="main-content">
     <header>
       <h1>Alicia AI v0.2</h1>
@@ -208,12 +263,35 @@
       </video>
     </section>
 
-    <section class="section content" id="about">
-      <h2>What is Alicia AI?</h2>
-      <p><strong>Alicia AI</strong> is your offline-ready voice-powered assistant for Unity. Designed for creators, it runs large language models locally using Ollama, giving you complete control without compromise.</p>
-      <p><strong>By Intelligence Ally</strong></p>
-      <a class="button" href="https://assetstore.unity.com/" target="_blank">🧩 View on Unity Asset Store</a>
-      <a class="button" href="mailto:intelligenceally@proton.me">📬 Contact Support</a>
+    <section class="section">
+      <div class="content-wrapper">
+        <!-- Left images -->
+        <div class="left-images">
+          <img src="500.jpg" alt="Alicia GUI 1">
+          <img src="501.jpg" alt="Alicia GUI 2">
+          <img src="502.jpg" alt="Alicia GUI 3">
+        </div>
+
+        <!-- Main Content -->
+        <div class="content" id="about">
+          <h2>What is Alicia AI?</h2>
+          <p><strong>Alicia AI</strong> is your offline-ready voice-powered assistant for Unity. Designed for creators, it runs large language models locally using Ollama, giving you complete control without compromise.</p>
+          <p><strong>By Intelligence Ally</strong></p>
+          <a class="button" href="https://assetstore.unity.com/" target="_blank">🧩 View on Unity Asset Store</a>
+          <a class="button" href="mailto:intelligenceally@proton.me">📬 Contact Support</a>
+        </div>
+
+        <!-- Chat Box -->
+        <div class="chat-box">
+          <div class="chat-messages" id="chatMessages">
+            <p><em>Welcome to the Alicia AI Chat!</em></p>
+          </div>
+          <div class="chat-input">
+            <input type="text" id="chatInput" placeholder="Type a message..." />
+            <button onclick="sendMessage()">Send</button>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section class="section content" id="requirements">
@@ -242,10 +320,30 @@
       <img src="alicia_showcase.jpg" alt="Alicia AI Showcase" />
     </section>
 
+<section class="section content">
+  <h2>Join the Chat</h2>
+  <p>Connect with other users of Alicia AI in our community group:</p>
+  <a class="button" href="https://www.facebook.com/groups/1416318052839208" target="_blank">💬 Join the Chat (Facebook)</a>
+</section>
+
     <footer>
       &copy; 2025 Intelligence Ally. All rights reserved. | <a href="#top" style="color: var(--accent);">Back to top</a>
     </footer>
   </div>
+
+  <script>
+    function sendMessage() {
+      const input = document.getElementById('chatInput');
+      const msg = input.value.trim();
+      if (!msg) return;
+      const chat = document.getElementById('chatMessages');
+      const p = document.createElement('p');
+      p.textContent = '👤 ' + msg;
+      chat.appendChild(p);
+      input.value = '';
+      chat.scrollTop = chat.scrollHeight;
+    }
+  </script>
 
 </body>
 </html>
