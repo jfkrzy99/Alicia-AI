@@ -1,375 +1,564 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Alicia AI v0.2 – Intelligence Ally</title>
-  <style>
-    :root {
-      --accent: #00ffcc;
-      --dark: #0d0d0d;
-      --bg-glass: rgba(0, 0, 0, 0.7);
-      --menu-glass: rgba(30, 30, 30, 0.6);
-      --hover: #009988;
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Alicia AI - Your offline-ready voice-powered assistant for Unity with local LLM support">
+    <title>Alicia AI v0.3 – Intelligence Ally</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧠</text></svg>">
+    <style>
+        :root {
+            --accent: #00ffcc;
+            --dark: #0d0d0d;
+            --bg-glass: rgba(0, 0, 0, 0.7);
+            --menu-glass: rgba(30, 30, 30, 0.6);
+            --hover: #009988;
+            --button-width: 280px;
+            --border-radius: 8px;
+            --transition-speed: 0.3s;
+        }
 
-    * {
-      box-sizing: border-box;
-    }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: url('555025.jpg') no-repeat center center fixed;
-      background-size: cover;
-      color: #f4f4f4;
-      margin: 0;
-      padding: 0;
-      display: flex;
-    }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: url('555025.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #f4f4f4;
+            display: flex;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
 
-    .sidebar {
-      width: 220px;
-      min-height: 100vh;
-      background-color: var(--menu-glass);
-      padding: 2rem 1rem;
-      position: sticky;
-      top: 0;
-      flex-shrink: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
+        /* Sidebar improvements */
+        .sidebar {
+            width: 240px;
+            min-height: 100vh;
+            background-color: var(--menu-glass);
+            padding: 2rem 1rem;
+            position: sticky;
+            top: 0;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(255,255,255,0.1);
+            transition: width var(--transition-speed) ease;
+        }
 
-    .sidebar h2 {
-      font-size: 1.2rem;
-      color: var(--accent);
-      margin-bottom: 2rem;
-    }
+            .sidebar h2 {
+                font-size: 1.2rem;
+                color: var(--accent);
+                margin-bottom: 2rem;
+                padding-left: 8px;
+            }
 
-    .sidebar a {
-      color: #ddd;
-      text-decoration: none;
-      display: block;
-      padding: 10px 12px;
-      border-radius: 6px;
-      margin-bottom: 8px;
-      transition: background 0.2s ease;
-    }
+            .sidebar a {
+                color: #ddd;
+                text-decoration: none;
+                display: block;
+                padding: 10px 12px;
+                border-radius: var(--border-radius);
+                margin-bottom: 6px;
+                transition: all var(--transition-speed) ease;
+            }
 
-    .sidebar a:hover {
-      background-color: var(--hover);
-      color: #fff;
-    }
+                .sidebar a:hover {
+                    background-color: var(--hover);
+                    color: #fff;
+                    transform: translateX(4px);
+                }
 
-    .main-content {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      overflow-x: hidden;
-    }
+                .sidebar a i {
+                    margin-right: 8px;
+                }
 
-    header {
-      background-color: var(--bg-glass);
-      padding: 1rem 2rem;
-      position: sticky;
-      top: 0;
-      z-index: 999;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
 
-    header h1 {
-      margin: 0;
-      font-size: 1.5rem;
-      color: var(--accent);
-    }
+        /* Header improvements */
+        header {
+            background-color: var(--bg-glass);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
 
-    nav a {
-      color: var(--accent);
-      margin-left: 1rem;
-      text-decoration: none;
-      font-weight: bold;
-    }
+            header h1 {
+                margin: 0;
+                font-size: 1.5rem;
+                color: var(--accent);
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
 
-    nav a:hover {
-      color: var(--hover);
-    }
+        nav a {
+            color: var(--accent);
+            margin-left: 1.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color var(--transition-speed) ease;
+        }
 
-    .button {
-      display: inline-block;
-      background: var(--accent);
-      color: #000;
-      padding: 12px 24px;
-      margin: 10px 0;
-      border-radius: 8px;
-      font-weight: bold;
-      text-decoration: none;
-      transition: background 0.3s ease;
-    }
+            nav a:hover {
+                color: var(--hover);
+            }
 
-    .button:hover {
-      background: var(--hover);
-      color: #fff;
-    }
+        /* Standardized buttons */
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent);
+            color: #000;
+            padding: 12px 16px;
+            margin: 10px 0;
+            border-radius: var(--border-radius);
+            font-weight: bold;
+            text-decoration: none;
+            transition: all var(--transition-speed) ease;
+            width: var(--button-width);
+            max-width: 100%;
+            border: none;
+            cursor: pointer;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
 
-    .section {
-      padding: 4rem 2rem;
-    }
+            .button:hover {
+                background: var(--hover);
+                color: #fff;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(0, 255, 204, 0.2);
+            }
 
-    .content-wrapper {
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      gap: 2rem;
-      flex-wrap: wrap;
-    }
+            .button.secondary {
+                background: rgba(0, 255, 204, 0.2);
+                color: var(--accent);
+            }
 
-    .left-images {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
+                .button.secondary:hover {
+                    background: rgba(0, 153, 136, 0.3);
+                    color: #fff;
+                }
 
-    .left-images img {
-      width: 150px;
-      border-radius: 12px;
-      border: 2px solid #333;
-    }
+        .section {
+            padding: 3rem 1.5rem;
+        }
 
-    .content {
-      flex: 1;
-      max-width: 1000px;
-      background-color: var(--bg-glass);
-      padding: 2rem;
-      border-radius: 12px;
-      min-width: 300px;
-    }
+        .content-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
 
-    .chat-box {
-      width: 250px;
-      max-height: 600px;
-      display: flex;
-      flex-direction: column;
-      background-color: var(--bg-glass);
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid #444;
-    }
+        .left-images {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            min-width: 150px;
+        }
 
-    .chat-messages {
-      flex: 1;
-      padding: 1rem;
-      overflow-y: auto;
-      font-size: 0.9rem;
-    }
+            .left-images img {
+                width: 150px;
+                border-radius: 12px;
+                border: 2px solid #333;
+                transition: transform var(--transition-speed) ease;
+            }
 
-    .chat-input {
-      display: flex;
-      border-top: 1px solid #555;
-    }
+                .left-images img:hover {
+                    transform: scale(1.03);
+                }
 
-    .chat-input input {
-      flex: 1;
-      border: none;
-      padding: 0.8rem;
-      background-color: #111;
-      color: #fff;
-    }
+        .content {
+            flex: 1;
+            max-width: 1000px;
+            background-color: var(--bg-glass);
+            padding: 2rem;
+            border-radius: 12px;
+            min-width: 300px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
 
-    .chat-input button {
-      background-color: var(--accent);
-      border: none;
-      color: #000;
-      padding: 0.8rem 1rem;
-      font-weight: bold;
-      cursor: pointer;
-    }
+        .chat-box {
+            width: 280px;
+            max-height: 600px;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--bg-glass);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #444;
+            backdrop-filter: blur(5px);
+        }
 
-    h2 {
-      color: var(--accent);
-      border-bottom: 1px solid var(--accent);
-      padding-bottom: 0.3rem;
-      margin-top: 2rem;
-    }
+        .chat-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            font-size: 0.9rem;
+        }
 
-    video, img {
-      width: 100%;
-      border-radius: 12px;
-    }
+            .chat-messages p {
+                margin-bottom: 12px;
+                line-height: 1.4;
+                word-break: break-word;
+            }
 
-    ul {
-      padding-left: 1.2rem;
-    }
+        .chat-input {
+            display: flex;
+            border-top: 1px solid #555;
+        }
 
-    footer {
-      text-align: center;
-      padding: 2rem;
-      background: var(--bg-glass);
-      color: #aaa;
-      font-size: 0.85rem;
-    }
+            .chat-input input {
+                flex: 1;
+                border: none;
+                padding: 0.8rem;
+                background-color: #111;
+                color: #fff;
+                font-size: 0.9rem;
+            }
 
-    @media (max-width: 1000px) {
-      .content-wrapper {
-        flex-direction: column;
-        align-items: center;
-      }
+            .chat-input button {
+                background-color: var(--accent);
+                border: none;
+                color: #000;
+                padding: 0 1.2rem;
+                font-weight: bold;
+                cursor: pointer;
+                transition: background var(--transition-speed) ease;
+            }
 
-      .left-images img, .chat-box {
-        width: 100%;
-        max-width: 300px;
-      }
+                .chat-input button:hover {
+                    background-color: var(--hover);
+                }
 
-      .chat-box {
-        height: auto;
-        max-height: none;
-      }
-    }
-  </style>
+        h2 {
+            color: var(--accent);
+            border-bottom: 1px solid var(--accent);
+            padding-bottom: 0.4rem;
+            margin: 1.5rem 0 1rem;
+            font-size: 1.5rem;
+        }
+
+            h2:first-child {
+                margin-top: 0;
+            }
+
+        video, img {
+            width: 100%;
+            border-radius: 12px;
+            display: block;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        ul {
+            padding-left: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        code {
+            background: rgba(0,255,204,0.1);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: monospace;
+            border: 1px solid rgba(0,255,204,0.3);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: var(--bg-glass);
+            color: #aaa;
+            font-size: 0.85rem;
+            margin-top: auto;
+            backdrop-filter: blur(5px);
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Collapsible panels */
+        .collapsible {
+            background: rgba(30,30,30,0.6);
+            border-radius: var(--border-radius);
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .collapsible-header {
+            padding: 1rem;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background var(--transition-speed) ease;
+        }
+
+            .collapsible-header:hover {
+                background: rgba(0,153,136,0.3);
+            }
+
+            .collapsible-header::after {
+                content: '+';
+                font-size: 1.3rem;
+                transition: transform var(--transition-speed) ease;
+            }
+
+            .collapsible-header.active::after {
+                transform: rotate(45deg);
+            }
+
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height var(--transition-speed) ease;
+            padding: 0 1rem;
+        }
+
+        .collapsible-content-inner {
+            padding: 1rem 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Download buttons container */
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 1.5rem 0;
+        }
+
+            .button-container .button {
+                margin: 0;
+            }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                min-height: auto;
+                flex-direction: row;
+                flex-wrap: wrap;
+                padding: 1rem;
+                position: relative;
+            }
+
+                .sidebar > div {
+                    flex: 1;
+                    min-width: 50%;
+                }
+
+                .sidebar h2 {
+                    margin-bottom: 1rem;
+                }
+
+            header {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            nav {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.5rem;
+            }
+
+                nav a {
+                    margin: 0;
+                }
+
+            .content-wrapper {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .left-images {
+                flex-direction: row;
+                justify-content: center;
+                width: 100%;
+            }
+
+                .left-images img, .chat-box {
+                    width: 100%;
+                    max-width: 280px;
+                }
+
+            .chat-box {
+                height: 400px;
+            }
+
+            .button {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sidebar > div {
+                min-width: 100%;
+            }
+
+            .left-images {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
 </head>
 <body>
 
-  <!-- Sidebar -->
-  <aside class="sidebar">
-    <div>
-      <h2>🔧 Menu</h2>
-      <a href="#">📁 Projects</a>
-      <a href="#">🧠 Models</a>
-      <a href="#">📊 Logs</a>
-      <a href="#">🎛️ Settings</a>
-    </div>
-    <div>
-      <a href="#">🚪 Logout</a>
-    </div>
-  </aside>
-
-  <!-- Main -->
-  <div class="main-content">
-    <header>
-      <h1>Alicia AI v0.2</h1>
-      <nav>
-        <a href="#about">About</a>
-        <a href="#requirements">Requirements</a>
-        <a href="#showcase">Showcase</a>
-        <a href="mailto:intelligenceally@proton.me">Contact</a>
-      </nav>
-    </header>
-
-    <section class="section">
-      <video autoplay loop muted playsinline>
-        <source src="alicia_presentation.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-    </section>
-
-    <section class="section">
-      <div class="content-wrapper">
-        <!-- Left images -->
-        <div class="left-images">
-          <img src="500.png" alt="Alicia GUI 1">
-          <img src="501.png" alt="Alicia GUI 2">
-          <img src="502.png" alt="Alicia GUI 3">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div>
+            <h2>🔧 Menu</h2>
+            <a href="#"><i>📁</i> Projects</a>
+            <a href="#"><i>🧠</i> Models</a>
+            <a href="#"><i>📊</i> Logs</a>
+            <a href="#"><i>🎛️</i> Settings</a>
         </div>
-
-        <!-- Main Content -->
-        <div class="content" id="about">
-          <h2>What is Alicia AI?</h2>
-          <p><strong>Alicia AI</strong> is your offline-ready voice-powered assistant for Unity. Designed for creators, it runs large language models locally using Ollama, giving you complete control without compromise.</p>
-          <p><strong>By Intelligence Ally</strong></p>
-          <a class="button" href="https://assetstore.unity.com/" target="_blank">🧩 View on Unity Asset Store</a>
-          <a class="button" href="mailto:intelligenceally@proton.me">📬 Contact Support</a>
+        <div>
+            <a href="#"><i>🚪</i> Logout</a>
         </div>
+    </aside>
 
-        <!-- Chat Box -->
-        <div class="chat-box">
-          <div class="chat-messages" id="chatMessages">
-            <p><em>Welcome to the Alicia AI Chat!</em></p>
-          </div>
-          <div class="chat-input">
-            <input type="text" id="chatInput" placeholder="Type a message..." />
-            <button onclick="sendMessage()">Send</button>
-          </div>
-        </div>
-      </div>
-    </section>
+    <!-- Main Content -->
+    <div class="main-content">
+        <header>
+            <h1>🧠 Alicia AI v0.3</h1>
+            <nav>
+                <a href="#about">About</a>
+                <a href="#requirements">Requirements</a>
+                <a href="#showcase">Showcase</a>
+                <a href="mailto:intelligenceally@proton.me">Contact</a>
+            </nav>
+        </header>
 
-    <section class="section content" id="requirements">
-        <h2>Requirements</h2>
-        <ul>
-            <li><a href="https://ollama.com" target="_blank">Ollama</a> installed and running</li>
-            <li>Local LLM like <code>llama3</code> or <code>phi4</code></li>
-            <li>CUDA-enabled GPU (8GB VRAM or more recommended)</li>
-            <li>Unity 2021 or newer</li>
-        </ul>
-        <p>Full setup guide included in the package.</p>
+        <section class="section">
+            <video autoplay loop muted playsinline>
+                <source src="alicia_presentation.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </section>
 
-        <a class="button"
-           href="https://github.com/jfkrzy99/Alicia-AI/releases/download/marytts-v1/MaryTTS.zip"
-           download
-           target="_blank"
-           rel="noopener noreferrer">
-            ⬇️ Download MaryTTS Package (79MB)
-        </a>
-        <p style="font-size: 0.85rem; color: #ccc; margin-top: 0.25rem;">
-            Required voice package for offline speech synthesis. Just unzip it in your assets folder , no installation required
-        </p>
+        <section class="section">
+            <div class="content-wrapper">
+                <!-- Left images -->
+                <div class="left-images">
+                    <img src="500.png" alt="Alicia GUI Example 1">
+                    <img src="501.png" alt="Alicia GUI Example 2">
+                    <img src="502.png" alt="Alicia GUI Example 3">
+                </div>
 
-        <a class="button"
-           href="https://ollama.com"
-           target="_blank"
-           style="margin-top: 5px; display: block;">
-            🚀 Download Ollama Engine
-        </a>
+                <!-- Main Content -->
+                <div class="content" id="about">
+                    <h2>What is Alicia AI?</h2>
+                    <p><strong>Alicia AI</strong> is your offline-ready voice-powered assistant for Unity. Designed for creators, it runs large language models locally using Ollama, giving you complete control without compromise.</p>
+                    <p><strong>By Intelligence Ally</strong></p>
 
-        <a class="button"
-           href="https://developer.nvidia.com/cuda-downloads"
-           target="_blank"
-           style="margin-top: 5px; display: block;">
-            ⚡ Download NVIDIA CUDA Toolkit
-        </a>
+                    <div class="button-container">
+                        <a class="button" href="https://assetstore.unity.com/" target="_blank">
+                            🧩 View on Unity Asset Store
+                        </a>
+                        <a class="button secondary" href="mailto:intelligenceally@proton.me">
+                            📬 Contact Support
+                        </a>
+                    </div>
+                </div>
 
-    </section>
+                <!-- Chat Box -->
+                <div class="chat-box">
+                    <div class="chat-messages" id="chatMessages">
+                        <p><em>Welcome to the Alicia AI Chat! Ask me anything about the software.</em></p>
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" id="chatInput" placeholder="Type a message..."
+                               onkeydown="if(event.key === 'Enter') sendMessage()" />
+                        <button onclick="sendMessage()">Send</button>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <section class="section content">
-      <h2>No Ads. No Cookies.</h2>
-      <p>We don’t track you. We don’t use cookies. We just build useful tools.</p>
-    </section>
+        <section class="section content" id="requirements">
+            <h2>System Requirements</h2>
+            <ul>
+                <li><a href="https://ollama.com" target="_blank">Ollama</a> installed and running</li>
+                <li>Local LLM like <code>llama3</code> or <code>phi4</code></li>
+                <li>CUDA-enabled GPU (8GB VRAM or more recommended)</li>
+                <li>Unity 2021 or newer</li>
+            </ul>
+            <p>Full setup guide included in the package.</p>
 
-    <section class="section content">
-      <h2>About Intelligence Ally</h2>
-      <p>We’re creators who build tools we wish existed. Alicia AI is the first of many.</p>
-    </section>
+            <div class="collapsible">
+                <div class="collapsible-header">
+                    Detailed Installation Instructions
+                </div>
+                <div class="collapsible-content">
+                    <div class="collapsible-content-inner">
+                        <ol>
+                            <li>Download and install Ollama from the official website</li>
+                            <li>Run <code>ollama pull llama3</code> in your terminal</li>
+                            <li>Install the MaryTTS package below</li>
+                            <li>Import Alicia AI into your Unity project</li>
+                            <li>Configure your API endpoints in Settings</li>
+                        </ol>
+                        <p>Need help? <a href="mailto:intelligenceally@proton.me">Contact our support team</a>.</p>
+                    </div>
+                </div>
+            </div>
 
-    <section class="section content" id="showcase">
-      <h2>Showcase</h2>
-      <img src="alicia_showcase.jpg" alt="Alicia AI Showcase" />
-    </section>
+            <h3>Download Required Packages</h3>
+            <div class="button-container">
+                <a class="button" href="https://github.com/jfkrzy99/Alicia-AI/releases/download/marytts-v1/MaryTTS.zip"
+                   download target="_blank" rel="noopener noreferrer">
+                    ⬇️ MaryTTS Package (79MB)
+                </a>
 
-<section class="section content">
-  <h2>Join the Chat</h2>
-  <p>Connect with other users of Alicia AI in our community group:</p>
-  <a class="button" href="https://www.facebook.com/groups/1416318052839208" target="_blank">💬 Join the Chat (Facebook)</a>
-</section>
+                <a class="button" href="https://ollama.com" target="_blank">
+                    🚀 Ollama Engine
+                </a>
 
-    <footer>
-      &copy; 2025 Intelligence Ally. All rights reserved. | <a href="#top" style="color: var(--accent);">Back to top</a>
-    </footer>
-  </div>
+                <a class="button" href="https://developer.nvidia.com/cuda-downloads" target="_blank">
+                    ⚡ NVIDIA CUDA Toolkit
+                </a>
+            </div>
+            <p style="font-size: 0.9rem; color: #ccc; margin-top: 0.25rem;">
+                MaryTTS package is required for offline speech synthesis. Just unzip it in your assets folder - no installation required.
+            </p>
+        </section>
 
-  <script>
-    function sendMessage() {
-      const input = document.getElementById('chatInput');
-      const msg = input.value.trim();
-      if (!msg) return;
-      const chat = document.getElementById('chatMessages');
-      const p = document.createElement('p');
-      p.textContent = '👤 ' + msg;
-      chat.appendChild(p);
-      input.value = '';
-      chat.scrollTop = chat.scrollHeight;
-    }
-  </script>
+        <section class="section content">
+            <h2>Privacy Focused</h2>
+            <p>We don't track you. We don't use cookies. We just build useful tools that respect your privacy.</p>
+        </section>
 
-</body>
-</html>
+        <section class="section content">
+            <h2>About Intelligence Ally</h2>
+            <p>We're creators
