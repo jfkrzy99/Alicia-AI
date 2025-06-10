@@ -561,4 +561,39 @@
 
         <section class="section content">
             <h2>About Intelligence Ally</h2>
-            <p>We're creators
+            <p>We're creators who build tools we wish existed. Alicia AI is the first of many.</p>
+        </section>
+
+        <section class="section content" id="showcase">
+            <h2>Showcase</h2>
+            <img src="alicia_showcase.jpg" alt="Alicia AI Showcase" />
+        </section>
+
+        <section class="section content">
+            <h2>Join the Chat</h2>
+            <p>Connect with other users of Alicia AI in our community group:</p>
+            <a class="button" href="https://www.facebook.com/groups/1416318052839208" target="_blank">💬 Join the Chat (Facebook)</a>
+        </section>
+
+        <footer>
+            &copy; 2025 Intelligence Ally. All rights reserved. | <a href="#top" style="color: var(--accent);">Back to top</a>
+        </footer>
+    </div>
+
+    <script>
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const msg = input.value.trim();
+            if (!msg) return;
+            const chat = document.getElementById('chatMessages');
+            const p = document.createElement('p');
+            p.textContent = '👤 ' + msg;
+            chat.appendChild(p);
+            input.value = '';
+            chat.scrollTop = chat.scrollHeight;
+        }
+    </script>
+
+</body>
+</html>
+
